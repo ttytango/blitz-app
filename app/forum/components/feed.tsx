@@ -1,9 +1,29 @@
-import { useFeed } from "app/forum/hooks/useFeed"
+// import { useFeed } from "app/forum/hooks/useFeed"
 import Link from "next/link"
+
 import humanReadableDateTime from "app/core/parsers/dates"
 
-export default function Feed() {
-  const { feed } = useFeed()
+// async function findAllPosts(): Post[]  {
+//   try {
+//     const response = await fetch("/api/forum/posts", {
+//       method: "GET",
+//       body: JSON.stringify(posts)
+//     });
+//     if (!response.ok) {
+//       throw new Error(response.statusText)
+//     }
+//     return await response;
+//   } catch(error) {
+//     return res.status(500).json({message: "Could not fetch any data"})
+
+//   }
+// }
+
+export default function Feed(props) {
+  // const {feed} = props;
+  // const { feed } = useFeed()
+  const posts = props.items
+  const feed = posts
 
   return feed ? (
     <>

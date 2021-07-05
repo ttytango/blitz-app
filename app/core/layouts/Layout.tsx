@@ -19,7 +19,7 @@ const Layout = ({ title, children }: LayoutProps) => {
       <MainNavigation />
       <Suspense
         fallback={
-          <div>
+          <div className="text-center mx-auto text-2xl">
             <h1>Loading...</h1>
           </div>
         }
