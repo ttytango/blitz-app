@@ -1,0 +1,11 @@
+.layoutMain {
+  margin: 0 2vw;
+  padding: 2vw;
+  text-align: center;
+  background: lightblue;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}

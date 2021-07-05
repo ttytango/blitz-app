@@ -1,5 +1,8 @@
-import { ReactNode } from "react"
+import React, { ReactNode, Suspense } from "react"
 import { Head } from "blitz"
+import MainNavigation from "./main-navigation"
+import styles from "./Layout.module.css"
+import Footer from "app/core/components/Footer"
 
 type LayoutProps = {
   title?: string
@@ -13,8 +16,17 @@ const Layout = ({ title, children }: LayoutProps) => {
         <title>{title || "myApp"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {children}
+      <MainNavigation />
+      <Suspense
+        fallback={
+          <div>
+            <h1>Loading...</h1>
+          </div>
+        }
+      >
+        <main className={styles.layoutMain}>{children}</main>
+      </Suspense>
+      <Footer />
     </>
   )
 }
