@@ -7,7 +7,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by Tim
+          Powered by Myself
         </a>
       </footer>
     </>

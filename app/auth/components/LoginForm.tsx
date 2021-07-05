@@ -12,8 +12,11 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
 
   return (
-    <div className="mx-auto">
-      <h1>Login</h1>
+    <div
+      className="shadow-md bg-white rounded-lg h-18 p-10"
+      // className="bg-blend-darken bg-[rgba(123,123,123,0.5)] rounded-2xl"
+    >
+      <h1 className="text-2xl">Login</h1>
 
       <Form
         submitText="Login"

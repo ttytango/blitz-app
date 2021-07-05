@@ -10,7 +10,11 @@ import logout from "app/auth/mutations/logout"
  */
 
 const Home: BlitzPage = () => {
-  return <div className="container"></div>
+  return (
+    <div className="mx-auto">
+      <h1 className="text-2xl">Home</h1>
+    </div>
+  )
 }
 
 Home.suppressFirstRenderFlicker = true

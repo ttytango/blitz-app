@@ -9,8 +9,8 @@ const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword)
 
   return (
-    <div>
-      <h1>Forgot your password?</h1>
+    <div className="shadow-md bg-white rounded-lg h-18 p-10 mx-auto">
+      <h1 className="text-sm md:text-lg mb-4">Forgot your password?</h1>
 
       {isSuccess ? (
         <div>
@@ -22,7 +22,7 @@ const ForgotPasswordPage: BlitzPage = () => {
         </div>
       ) : (
         <Form
-          submitText="Send Reset Password Instructions"
+          submitText="Send Reset Instructions"
           schema={ForgotPassword}
           initialValues={{ email: "" }}
           onSubmit={async (values) => {
