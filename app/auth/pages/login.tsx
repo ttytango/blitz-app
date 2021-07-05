@@ -26,29 +26,19 @@ export const UserInfo = () => {
         </div>
       </>
     )
-  } else {
-    return (
-      <>
-        <Link href={Routes.SignupPage()}>
-          <a className="button small">
-            <strong>Sign Up</strong>
-          </a>
-        </Link>
-        <Link href={Routes.LoginPage()}>
-          <a className="button small">
-            <strong>Login</strong>
-          </a>
-        </Link>
-      </>
-    )
   }
+  return (
+    <>
+      <p className="mb-4">You must be logged in</p>
+    </>
+  )
 }
 
 const LoginPage: BlitzPage = () => {
   const router = useRouter()
 
   return (
-    <div>
+    <div className="mx-auto">
       <UserInfo />
       <LoginForm
         onSuccess={() => {

@@ -12,7 +12,7 @@ export const SignupForm = (props: SignupFormProps) => {
   const [signupMutation] = useMutation(signup)
 
   return (
-    <div>
+    <div className="shadow-md bg-white rounded-lg h-18 p-10">
       <h1>Create an Account</h1>
 
       <Form

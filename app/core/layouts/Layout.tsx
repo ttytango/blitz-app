@@ -17,15 +17,23 @@ const Layout = ({ title, children }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainNavigation />
-      <Suspense
-        fallback={
-          <div className="text-center mx-auto text-2xl">
-            <h1>Loading...</h1>
-          </div>
-        }
-      >
-        <main className={styles.layoutMain}>{children}</main>
-      </Suspense>
+
+      <main className={styles.layoutMain}>
+        <Suspense
+          fallback={
+            <div className="bg-blue-200 p-12 w-5/12 mx-auto rounded-2xl border-2 border-black">
+              <h1 className="text-2xl text-center">Loading...</h1>
+              <button type="button" className="bg-rose-600 p-8" disabled>
+                <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg>
+                Processing
+              </button>
+            </div>
+          }
+        >
+          {children}
+        </Suspense>
+      </main>
+
       <Footer />
     </>
   )

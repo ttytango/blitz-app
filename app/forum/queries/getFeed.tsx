@@ -1,7 +1,7 @@
 import { Ctx } from "blitz"
 import db, { Prisma } from "db"
 
-type GetUsersInput = Pick<
+type getFeedInput = Pick<
   Prisma.PostFindManyArgs,
   "where"
   // | "orderBy" | "skip" | "take"

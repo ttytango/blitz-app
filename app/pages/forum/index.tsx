@@ -7,6 +7,10 @@ import Feed from "app/forum/components/feed"
 import db from "db"
 import { PrismaClient } from "@prisma/client"
 
+// type props {
+//   postList
+// }
+
 const ForumHome: BlitzPage = (props) => {
   const posts = props.postList
   const session = useSession()
@@ -15,7 +19,13 @@ const ForumHome: BlitzPage = (props) => {
   if (session.userId === null) {
     return (
       <div>
-        <h2>Please log in to continue</h2>
+        <h2>
+          Please{" "}
+          <a href={"/login"} className="text-blue-800">
+            log in
+          </a>{" "}
+          to continue
+        </h2>
       </div>
     )
   }
@@ -36,7 +46,7 @@ const ForumHome: BlitzPage = (props) => {
   )
 }
 
-ForumHome.suppressFirstRenderFlicker = true
+ForumHome.suppressFirstRenderFlicker = false
 ForumHome.getLayout = (page) => <Layout title="Home">{page}</Layout>
 
 export async function getServerSideProps() {
@@ -55,8 +65,6 @@ export async function getServerSideProps() {
   })
   const stringifiedFeed = await JSON.stringify(feed)
   const parsedFeed = await JSON.parse(stringifiedFeed)
-
-  console.log("server side code")
 
   //   const res = await db.post.findMany({
   //   where: {

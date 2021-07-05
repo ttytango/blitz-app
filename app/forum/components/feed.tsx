@@ -22,8 +22,7 @@ import humanReadableDateTime from "app/core/parsers/dates"
 export default function Feed(props) {
   // const {feed} = props;
   // const { feed } = useFeed()
-  const posts = props.items
-  const feed = posts
+  const feed = props.items
 
   return feed ? (
     <>
