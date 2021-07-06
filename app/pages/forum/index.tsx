@@ -40,6 +40,11 @@ const ForumHome: BlitzPage = (props) => {
 
   return (
     <div>
+      <div>
+        <Link href={"/forum/new-post"}>
+          <button className="no-underline hover:underline text-blue-800">Create a Post</button>
+        </Link>
+      </div>
       <UserInfo />
       <Feed items={posts} />
     </div>
