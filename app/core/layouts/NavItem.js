@@ -30,7 +30,7 @@ import React, { useState } from "react"
 // }
 // export default NavItem
 export default function NavItem({ href, /*isActive, */ children, activeHandler }) {
-  const [isActive, setIsActive] = useState(false)
+  // const [isActive, setIsActive] = useState(false)
 
   // const windowPath = {window}.location.pathname === to;
   // let className = isActive ? 'active' : '';
@@ -47,8 +47,9 @@ export default function NavItem({ href, /*isActive, */ children, activeHandler }
     <li>
       <Link href={href}>
         <a
-          className={`block px-4 py-2 rounded-md ${isActive ? "bg-blue-100 text-blue-700" : ""}`}
-          onClick={activeHandler}
+          className={"no-underline hover:underline"}
+          /* className={`block px-4 py-2 rounded-md ${isActive ? "bg-blue-100 text-blue-700" : ""}`}*/
+          // onClick={activeHandler}
         >
           {children}
         </a>

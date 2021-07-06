@@ -1,12 +1,14 @@
 import { Suspense } from "react"
-import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation } from "blitz"
+import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getPost from "app/forum/queries/getPost"
 import humanReadableDateTime from "app/core/parsers/dates"
+import deletePost from "app/forum/mutations/deletePost"
 
 export const Post = () => {
   const router = useRouter()
   const postId = useParam("postId", "number")
+  const [deletePostMutation] = useMutation(deletePost)
   const [post] = useQuery(getPost, { id: postId })
 
   // JSON.stringify(post, null, 2)
@@ -26,14 +28,14 @@ export const Post = () => {
         </Link>
         <button
           type="button"
-          disabled
-          // onClick={async () => {
-          //   if (window.confirm("This will be deleted")) {
-          //     await deleteProjectMutation({ id: project.id })
-          //     router.push("/projects")
-          //   }
-          // }}
+          onClick={async () => {
+            if (window.confirm("This will be deleted")) {
+              await deleteCommentMutation({ id: comment.id })
+              router.push(Routes.CommentsPage())
+            }
+          }}
           style={{ marginLeft: "0.5rem" }}
+          className={"bg-red text-"}
         >
           Delete
         </button>

@@ -21,7 +21,7 @@ const ForumHome: BlitzPage = (props) => {
       <div>
         <h2>
           Please{" "}
-          <a href={"/login"} className="text-blue-800">
+          <a href={"/login"} className="no-underline hover:underline text-blue-800">
             log in
           </a>{" "}
           to continue
