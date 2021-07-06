@@ -3,12 +3,16 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getComment from "app/comments/queries/getComment"
 import deleteComment from "app/comments/mutations/deleteComment"
+import getUser from "app/users/queries/getUser"
+import getPost from "app/forum/queries/getPost"
 
 export const Comment = () => {
   const router = useRouter()
   const commentId = useParam("commentId", "number")
   const [deleteCommentMutation] = useMutation(deleteComment)
   const [comment] = useQuery(getComment, { id: commentId })
+  const [author] = useQuery(getUser, comment.authorId)
+  const [post] = useQuery(getPost, comment.postId)
 
   return (
     <>

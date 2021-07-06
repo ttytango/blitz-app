@@ -37,6 +37,8 @@ export default function Feed(props) {
             <time>Last updated: {humanReadableDateTime(post.updatedAt)}</time>
             <time>Created at: {humanReadableDateTime(post.createdAt)}</time>
             <p>Originally posted by: {post.authorId}</p>
+            <p>Originally posted by: {post.authorId}</p>
+
             <p>Last commented on by: {post.comment}</p>
           </div>
           <hr />

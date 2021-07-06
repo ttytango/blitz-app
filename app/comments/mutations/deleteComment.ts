@@ -7,6 +7,6 @@ const DeleteComment = z.object({
 })
 
 export default resolver.pipe(resolver.zod(DeleteComment), resolver.authorize(), async ({ id }) => {
-  // TODO: in multi-tenant app, you must add validation to ensure correct tenant
+  // TODO: in multi-tenant app, add validation to ensure correct tenant
   return await db.comment.deleteMany({ where: { id } })
 })
