@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./db.sqlite"
+  provider = "postgres"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -50,16 +50,18 @@ model Token {
 }
 
 model Post {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  title     String
-  content   String?
-  published Boolean   @default(false)
-  viewCount Int       @default(0)
-  authorId  Int?
-  author    User?     @relation(fields: [authorId], references: [id])
-  comment   Comment[]
+  id         Int       @id @default(autoincrement())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  title      String
+  content    String?
+  published  Boolean   @default(false)
+  viewCount  Int       @default(0)
+  authorId   Int?
+  categoryId Int?
+  author     User?     @relation(fields: [authorId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
+  comment    Comment[]
 
   @@map("posts")
 }
@@ -75,4 +77,15 @@ model Comment {
   thread    Post?    @relation(fields: [postId], references: [id])
 
   @@map("comments")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  post Post[]
+}
+
+enum Role {
+  USER
+  ADMIN
 }

@@ -46,13 +46,14 @@ const ForumHome: BlitzPage = (props) => {
   )
 }
 
-ForumHome.suppressFirstRenderFlicker = false
+ForumHome.suppressFirstRenderFlicker = true
 ForumHome.getLayout = (page) => <Layout title="Home">{page}</Layout>
 
 export async function getServerSideProps() {
   const prisma = new PrismaClient()
   // const res = await prisma.post.findMany()
   const feed = await prisma.post.findMany({
+    // where: {published: false},
     orderBy: { updatedAt: "desc" },
     // include: { author: { select: { firstName: true } } },
     // include: {

@@ -8,20 +8,24 @@ import db from "db"
  * realistic data.
  */
 const seed = async () => {
-  // for (let i = 0; i < 5; i++) {
-  //   await db.post.create({ data: {
-  //     title: "Project " + i,
-  //     content: "Some content " + i
-  //     }
-  //     })
-  // }
-  await db.post.create({
+  return await db.user.create({
     data: {
-      title: "Project " + i,
-      content: "Some content " + i,
-      user: "administrator",
+      email: "test@seed.com",
+      post: {
+        create: [
+          { title: "My seeded title", content: "some Content" },
+          { title: "Another bold title", content: "most interesting content" },
+        ],
+      },
     },
   })
+  // await db.post.create({
+  //   data: {
+  //     title: "Project " + i,
+  //     content: "Some content " + i,
+  //     user: "administrator",
+  //   },
+  // })
 }
 
 export default seed
