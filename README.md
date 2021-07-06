@@ -9,6 +9,7 @@ This is a [Blitz.js](https://github.com/blitz-js/blitz) app.
 Run your app in the development mode.
 
 ```
+npx prisma migrate dev
 npx blitz dev
 ```
 
