@@ -21,7 +21,7 @@ const Layout = ({ title, children }: LayoutProps) => {
       <main className={styles.layoutMain}>
         <Suspense
           fallback={
-            <div className="bg-blue-200 p-12 w-5/12 mx-auto rounded-2xl border-2 border-black">
+            <div className="shadow-md bg-white p-12 w-5/12 mx-auto rounded-lg">
               <h1 className="text-2xl text-center">Loading...</h1>
               <button type="button" className="bg-rose-600 p-8" disabled>
                 <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg>

@@ -1,7 +1,5 @@
-// app/pages/projects/new.tsx
 import { Link, Routes, useRouter, useMutation, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
-// Notice how we import the server function directly
 import createPost, { CreatePost } from "app/forum/mutations/createPost"
 import { PostForm } from "app/forum/components/PostForm"
 

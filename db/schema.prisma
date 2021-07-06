@@ -18,6 +18,7 @@ model User {
   sessions       Session[]
   tokens         Token[]
   post           Post[]
+  comments       Comment[]
 }
 
 model Session {
@@ -49,15 +50,29 @@ model Token {
 }
 
 model Post {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String
+  content   String?
+  published Boolean   @default(false)
+  viewCount Int       @default(0)
+  authorId  Int?
+  author    User?     @relation(fields: [authorId], references: [id])
+  comment   Comment[]
+
+  @@map("posts")
+}
+
+model Comment {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
+  content   String
   authorId  Int?
+  postId    Int?
   author    User?    @relation(fields: [authorId], references: [id])
+  thread    Post?    @relation(fields: [postId], references: [id])
 
-  @@map("posts")
+  @@map("comments")
 }
