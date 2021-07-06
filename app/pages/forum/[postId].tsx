@@ -1,32 +1,32 @@
-import { Suspense } from "react"
-import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Routes } from "blitz"
+import {
+  BlitzPage,
+  Link,
+  Routes,
+  useMutation,
+  useParam,
+  useParams,
+  useQuery,
+  useRouter,
+} from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getPost from "app/forum/queries/getPost"
 import humanReadableDateTime from "app/core/parsers/dates"
 import deletePost from "app/forum/mutations/deletePost"
 import getUser from "app/users/queries/getUser"
+import { CommentForm } from "../../comments/components/CommentForm"
 
-export const Post = () => {
+export const Post = ({ here }) => {
+  const postId = here
   const router = useRouter()
-  const postId = useParam("postId", "number")
   const [deletePostMutation] = useMutation(deletePost)
   const [post] = useQuery(getPost, { id: postId })
   const [author] = useQuery(getUser, post.authorId)
 
-  // JSON.stringify(post, null, 2)
   const created = humanReadableDateTime(post.updatedAt)
   return (
     <>
-      {/*<pre>*/}
-      {/*  {JSON.stringify(post, null, 2)}*/}
-      {/*</pre>*/}
-      {/*<pre>*/}
-      {/*  {JSON.stringify(user, null, 2)}*/}
-      {/*</pre>*/}
       <div>
         <h1>Post {post.id}</h1>
-        {/*<pre>{JSON.stringify(post, null, 2)}</pre>*/}
-        {/*<p>{humanReadableDateTime( post.createdAt )}</p>*/}
         <h4 className={"text-lg font-bold"}>{post.title}</h4>
         <p>Content: {post.content}</p>
         <p>Author: {author.name}</p>
@@ -53,6 +53,8 @@ export const Post = () => {
 }
 
 const PostDetailPage: BlitzPage = () => {
+  const postId = useParam("postId", "number")
+
   return (
     <div>
       <p>
@@ -61,9 +63,11 @@ const PostDetailPage: BlitzPage = () => {
         </Link>
       </p>
 
-      {/*<Suspense fallback={<div>Loading...</div>}>*/}
-      <Post />
-      {/*</Suspense>*/}
+      <Post here={postId} />
+      <CommentForm here={postId} onSubmit={(e) => e.preventDefault} />
+      {/*<Link href={`/forum/${postId}/comments/create-comment`}>*/}
+      {/*  <a>New Comment</a>*/}
+      {/*</Link>*/}
     </div>
   )
 }
