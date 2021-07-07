@@ -29,14 +29,6 @@ const ForumHome: BlitzPage = (props) => {
       </div>
     )
   }
-  // if (loading) {
-  //   return <div>Loading....</div>
-  // }
-
-  // const {users} = useUsers();
-  // if (posts.length < 0) {
-  //   return <div>Loading...</div>
-  // }
 
   return (
     <div>
@@ -50,23 +42,29 @@ ForumHome.suppressFirstRenderFlicker = true
 ForumHome.getLayout = (page) => <Layout title="Home">{page}</Layout>
 
 export async function getServerSideProps() {
-  const prisma = new PrismaClient()
+  // const prisma = new PrismaClient()
   // const res = await prisma.post.findMany()
-  const feed = await prisma.post.findMany({
-    // where: {published: false},
-    orderBy: { updatedAt: "desc" },
-    // include: { author: { select: { firstName: true } } },
-    // include: {
-    // author: {
-    // 	select: {
-    // 		id: false,
-    // 	},
-    // },
-    // },
+  // @ts-ignore
+
+  let feed = await db.post.findMany({
+    where: {
+      published: false,
+    },
   })
+
+  // let feed = await db.post.findMany({
+  // return transaction([something], [somethingElse])
+
+  //   await db.post.findMany({
+  //   // where: {published: false},
+  //   orderBy: { updatedAt: "desc" },
+  //
+  // })
+  // const feed = await transaction(something, somethingElse)
+
   const stringifiedFeed = await JSON.stringify(feed)
   const parsedFeed = await JSON.parse(stringifiedFeed)
-
+  console.log(parsedFeed)
   //   const res = await db.post.findMany({
   //   where: {
   //     published: true,

@@ -1,7 +1,12 @@
 // import { useFeed } from "app/forum/hooks/useFeed"
-import Link from "next/link"
+// import Link from "next/link"
 
 import humanReadableDateTime from "app/core/parsers/dates"
+import { Routes, Link, useQuery } from "blitz"
+import PostDetailPage from "../../pages/forum/[postId]"
+import getUser from "../../users/queries/getUser"
+import getUsers from "../../users/queries/getUsers"
+import { map } from "zod"
 
 // async function findAllPosts(): Post[]  {
 //   try {
@@ -19,28 +24,52 @@ import humanReadableDateTime from "app/core/parsers/dates"
 //   }
 // }
 
+export function PostListDetail(props) {
+  // const userId = props.poster;
+  const author = useQuery(getUser, { id: props.poster })
+  console.log(author)
+  return (
+    <div className="flex flex-col mb-2">
+      <p>Originally posted by: {author.id}</p>
+    </div>
+  )
+}
 export default function Feed(props) {
   // const {feed} = props;
   // const { feed } = useFeed()
   const feed = props.items
+  // const [author] = useQuery(getUsers, {id: feed.authorId}  )
+  // console.log(author)
+
+  // const getAuthor = (post) => {
+  //   let author = [];
+  //   post.forEach((p) => {
+  //     author += p.authorId
+  //   })
+  //  author.map((person) => {
+  //    let data
+  //    return data = useQuery(getUser, { id: author[person] })
+  //  })
+  // }
+
+  // const [users] = useQuery(getUsers, {data: { id: authorId }} )
+  // post.forEach((post) => {
+  // })
 
   return feed ? (
     <>
       {feed.map((post) => (
-        <li className="flex flex-col leading-10 text-left px-2 md:px-6" key={post.id} id={post.id}>
-          <Link href={`/forum/${post.id}`}>
+        <li className="flex flex-col leading-10 text-left px-2 md:px-6" key={post.id}>
+          <Link href={Routes.PostDetailPage({ postId: post.id, page: 0 })}>
             <a className="text-blue-800 leading-10 mt-2 sm:text-2xl hover:underline text-lg py-2">
               {post.title}
             </a>
           </Link>
-          <div className="flex flex-col mb-2">
-            <time>Last updated: {humanReadableDateTime(post.updatedAt)}</time>
-            <time>Created at: {humanReadableDateTime(post.createdAt)}</time>
-            <p>Originally posted by: {post.authorId}</p>
-            <p>Originally posted by: {post.authorId}</p>
+          <time>Last updated: {humanReadableDateTime(post.updatedAt)}</time>
+          <time>Created at: {humanReadableDateTime(post.createdAt)}</time>
+          <PostListDetail poster={post.authorId} />
 
-            <p>Last commented on by: {post.comment}</p>
-          </div>
+          <p>Last commented on by: {post.comments}</p>
           <hr />
         </li>
       ))}

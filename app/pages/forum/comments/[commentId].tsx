@@ -12,8 +12,8 @@ export const Comment = () => {
   const commentId = useParam("commentId", "number")
   const [deleteCommentMutation] = useMutation(deleteComment)
   const [comment] = useQuery(getComment, { id: commentId })
-  const [author] = useQuery(getUser, comment.authorId)
-  const [post] = useQuery(getPost, comment.postId)
+  const [author] = useQuery(getUser, { id: comment.authorId })
+  const [post] = useQuery(getPost, { id: comment.postId })
 
   return (
     <>
