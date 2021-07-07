@@ -1,9 +1,12 @@
 import { resolver, Ctx, useParams } from "blitz"
 import db from "db"
 import { z } from "zod"
+import { util } from "zod/lib/helpers/util"
 
-const CreateComment = z.object({
+export const CreateComment = z.object({
   content: z.string(),
+  authorId: z.number(),
+  postId: z.number(),
 })
 
 export default resolver.pipe(resolver.zod(CreateComment), resolver.authorize(), async (input) => {
@@ -11,25 +14,4 @@ export default resolver.pipe(resolver.zod(CreateComment), resolver.authorize(), 
   return await db.comment.create({
     data: input,
   })
-  // const postID =
-  // return await db.$transaction([
-  //   db.post.findFirst({
-  //     where: {
-  //       id: postID,
-  //     },
-  //     select: {
-  //       name: true,
-  //     }
-  //   }),
-  //   db.post.create({
-  //     data: {
-  //       ...input,
-  //       authorId: userID,
-  //     }
-  //   })
-  // ])
-
-  // return await db.comment.create({
-  //   data: input
-  // })
 })

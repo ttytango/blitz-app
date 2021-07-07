@@ -13,14 +13,16 @@ import getPost from "app/forum/queries/getPost"
 import humanReadableDateTime from "app/core/parsers/dates"
 import deletePost from "app/forum/mutations/deletePost"
 import getUser from "app/users/queries/getUser"
-import { CommentForm } from "../../comments/components/CommentForm"
+import { CommentForm } from "app/comments/components/CommentForm"
+import { CommentsList } from "./comments/index"
+import CommentsPage from "./comments"
 
 export const Post = ({ here }) => {
   const postId = here
   const router = useRouter()
   const [deletePostMutation] = useMutation(deletePost)
   const [post] = useQuery(getPost, { id: postId })
-  const [author] = useQuery(getUser, post.authorId)
+  const [author] = useQuery(getUser, { id: post.authorId })
 
   const created = humanReadableDateTime(post.updatedAt)
   return (
@@ -54,7 +56,7 @@ export const Post = ({ here }) => {
 
 const PostDetailPage: BlitzPage = () => {
   const postId = useParam("postId", "number")
-
+  console.log(postId)
   return (
     <div>
       <p>
@@ -64,7 +66,11 @@ const PostDetailPage: BlitzPage = () => {
       </p>
 
       <Post here={postId} />
-      <CommentForm here={postId} onSubmit={(e) => e.preventDefault} />
+      <CommentForm
+        here={postId}
+        // onSubmit={(e) => e.preventDefault}
+      />
+      <CommentsPage />
       {/*<Link href={`/forum/${postId}/comments/create-comment`}>*/}
       {/*  <a>New Comment</a>*/}
       {/*</Link>*/}

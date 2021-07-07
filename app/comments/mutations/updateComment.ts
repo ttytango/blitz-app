@@ -5,6 +5,7 @@ import { z } from "zod"
 const UpdateComment = z.object({
   id: z.number(),
   content: z.string(),
+  postId: z.number(),
 })
 
 export default resolver.pipe(
