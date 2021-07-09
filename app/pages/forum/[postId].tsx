@@ -13,25 +13,27 @@ import getPost from "app/forum/queries/getPost"
 import humanReadableDateTime from "app/core/parsers/dates"
 import deletePost from "app/forum/mutations/deletePost"
 import getUser from "app/users/queries/getUser"
+import getUsers from "app/users/queries/getUsers"
 import { CommentForm } from "app/comments/components/CommentForm"
 import { CommentsList } from "./comments/index"
 import CommentsPage from "./comments"
+import ShowCommentPage from "./comments/[commentId]"
 
 export const Post = ({ here }) => {
   const postId = here
   const router = useRouter()
   const [deletePostMutation] = useMutation(deletePost)
   const [post] = useQuery(getPost, { id: postId })
-  const [author] = useQuery(getUser, { id: post.authorId })
+  const [authors] = useQuery(getUsers, { id: post.authorId })
 
-  const created = humanReadableDateTime(post.updatedAt)
+  const created = humanReadableDateTime(post.createdAt)
   return (
     <>
       <div>
         <h1>Post {post.id}</h1>
         <h4 className={"text-lg font-bold"}>{post.title}</h4>
         <p>Content: {post.content}</p>
-        <p>Author: {author.name}</p>
+        {/*<p>Author: {authors[post.authorId].name}</p>*/}
         <p>{created}</p>
         <Link href={`/forum/${post.id}/edit`}>
           <a>Edit</a>
@@ -56,7 +58,7 @@ export const Post = ({ here }) => {
 
 const PostDetailPage: BlitzPage = () => {
   const postId = useParam("postId", "number")
-  console.log(postId)
+  // console.log(postId)
   return (
     <div>
       <p>
@@ -71,6 +73,8 @@ const PostDetailPage: BlitzPage = () => {
         // onSubmit={(e) => e.preventDefault}
       />
       <CommentsPage />
+
+      {/*<ShowCommentPage here={postId} />*/}
       {/*<Link href={`/forum/${postId}/comments/create-comment`}>*/}
       {/*  <a>New Comment</a>*/}
       {/*</Link>*/}
