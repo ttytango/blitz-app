@@ -21,8 +21,10 @@ import CommentsPage from "./comments"
 import ShowCommentPage from "./comments/[commentId]"
 import { UserInfo } from "../../auth/pages/login"
 import { useEffect } from "react"
+import { useCurrentUser } from "../../core/hooks/useCurrentUser"
 
 export const Post = ({ here }) => {
+  const currentUser = useCurrentUser()
   const postId = here
   const router = useRouter()
   const [deletePostMutation] = useMutation(deletePost)
@@ -36,30 +38,52 @@ export const Post = ({ here }) => {
 
   return (
     <>
-      <div>
-        <h1>Post {post.id}</h1>
-        <h4 className={"text-lg font-bold"}>{post.title}</h4>
-        <p>Content: {post.content}</p>
-        <p>Posted By: {userName}</p>
-        {/*<p>Author: {authors[post.authorId].name}</p>*/}
-        <p>{createdAt}</p>
-
-        <Link href={`/forum/${post.id}/edit`}>
-          <a>Edit</a>
-        </Link>
-        <button
-          type="button"
-          onClick={async () => {
-            if (window.confirm("This will be deleted")) {
-              await deletePostMutation({ id: post.id })
-              router.push(Routes.ForumHome())
-            }
-          }}
-          style={{ marginLeft: "0.5rem" }}
-          className={"bg-red text-"}
+      <div className="py-4 my-4 lg:mx-4 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-lg font-bold text-indigo-100 shadow-sm md:shadow-lg">
+        <h4 className={"text-lg font-bold mb-4 font-normal lg:font-semibold"}>{post.title}</h4>
+        <div
+          className={
+            "p-4 lg:mx-2 border border-1 border-black bg-gray-100 text-gray-900 text-left md:text-justify text-sm lg:text-lg font-normal"
+          }
         >
-          Delete
-        </button>
+          <p>{post.content}</p>
+        </div>
+        <div className={"text-left mt-4 mb-2 px-4 font-normal text-sm lg:text-lg"}>
+          <p>Posted By: {userName}</p>
+          <p>Post written: {createdAt}</p>
+        </div>
+        {currentUser.id !== post.authorId ? (
+          <div className={"text-right"}>
+            <Link href={"#"}>
+              <a
+                onClick={() => {
+                  prompt("Report post....")
+                }}
+                className={"text-red-600 px-6"}
+              >
+                Report Post?
+              </a>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <Link href={`/forum/${post.id}/edit`}>
+              <a>Edit</a>
+            </Link>
+            <button
+              type="button"
+              onClick={async () => {
+                if (window.confirm("This will be deleted")) {
+                  await deletePostMutation({ id: post.id })
+                  router.push(Routes.ForumHome())
+                }
+              }}
+              style={{ marginLeft: "0.5rem" }}
+              className={"bg-red text-"}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </>
   )
@@ -70,8 +94,8 @@ const PostDetailPage: BlitzPage = () => {
   return (
     <div className={"bg-gray-600"}>
       <UserInfo />
-      <div className={"bg-gray-200 md:mx-4 md:mt-4"}>
-        <div className={"py-2 text-right p-2 mx-4"}>
+      <div className={"bg-gray-400 md:mx-4 mt-4"}>
+        <div className={"p-4 text-right mx-4"}>
           <p>
             <Link href={"/forum"}>
               <a

@@ -60,7 +60,7 @@ export const CommentsList = () => {
   //   }
   // })
 
-  console.log("PostId: " + currentPostId)
+  // console.log("PostId: " + currentPostId)
 
   const router = useRouter()
   // const path = router.asPath

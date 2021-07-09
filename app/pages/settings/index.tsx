@@ -18,12 +18,12 @@ const SettingsPage: BlitzPage = () => {
     <div>
       <UserInfo />
 
-      <div className={"p-6"}>
-        <h1 className="text-2xl text-center">Settings</h1>
+      <div className={"p-2 sm:p-6"}>
+        <h1 className="text-2xl mt-2 text-center">Settings</h1>
         <Link href={"/forum"}>
           <a>Return to Forum</a>
         </Link>
-        <div className={"bg-blue-200"}>
+        <div className={"bg-blue-200 py-8 my-2"}>
           <ChangePasswordForm />
         </div>
 

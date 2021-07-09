@@ -5,7 +5,7 @@ import Layout from "app/core/layouts/Layout"
 import Feed from "app/forum/components/feed"
 // import useSWR from "swr";
 import db from "db"
-import { PrismaClient } from "@prisma/client"
+// import { PrismaClient } from "@prisma/client"
 
 // type props {
 //   postList
@@ -52,33 +52,10 @@ export async function getServerSideProps() {
     },
   })
 
-  // let feed = await db.post.findMany({
-  // return transaction([something], [somethingElse])
-
-  //   await db.post.findMany({
-  //   // where: {published: false},
-  //   orderBy: { updatedAt: "desc" },
-  //
-  // })
-  // const feed = await transaction(something, somethingElse)
-
   const stringifiedFeed = await JSON.stringify(feed)
   const parsedFeed = await JSON.parse(stringifiedFeed)
   console.log(parsedFeed)
-  //   const res = await db.post.findMany({
-  //   where: {
-  //     published: true,
-  //   },
-  // })
-  // const {data, error} = useSWR("/api/forum/posts");
-  // const loading = !data;
-  //   if (loading) {
-  //       return <div>Loading...</div>
-  //   }
 
-  //   if (error) {
-  //      return <div>Error!</div>
-  //   }
   return {
     props: {
       postList: parsedFeed,

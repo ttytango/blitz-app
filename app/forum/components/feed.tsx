@@ -50,10 +50,10 @@ export default function Feed(props) {
   const feed = props.items
 
   return feed ? (
-    <div className={"bg-gray-600 p-4 border border-1 border-black w-100 mx-auto"}>
+    <div className={"bg-gray-600 p-1 md:p-4 border border-1 border-black w-100 mx-auto"}>
       {feed.map((post) => (
         <li
-          className="flex flex-col leading-10 text-left px-2 md:px-6 my-2 md:w-11/12 mx-auto"
+          className="flex flex-col leading-10 text-left px-0.5 md:px-2 lg:px-6 my-2 w-12/12 md:w-11/12 mx-auto"
           key={post.id}
         >
           <div className="bg-gray-300 my-2 border border-1 border-black">
