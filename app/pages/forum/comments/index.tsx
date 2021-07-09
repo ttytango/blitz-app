@@ -38,7 +38,8 @@ export const CommentsList = () => {
   // const postId = here
   // const [currentPath, setCurrentPath] = useState("")
   const currentPostId = useParam("postId", "number")
-  const pathway = JSON.stringify(currentPostId)
+  // const [author] = useQuery(getUser, {id: authorId, select: {name:true}})
+  // const pathway = JSON.stringify(currentPostId)
   // setCurrentPath(pathway)
   // const newPath = currentPath;
   // console.log(newPath)
@@ -65,6 +66,7 @@ export const CommentsList = () => {
   // const [post] = useQuery(getPost, props.page)
 
   // console.log(post.id)
+
   const page = Number(router.query.page) || 0
   const [{ comments, hasMore }] = usePaginatedQuery(getComments, {
     where: { postId: currentPostId },
@@ -72,7 +74,6 @@ export const CommentsList = () => {
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
-
   // useEffect(() => {
   //
   //   router.push("/?page=1", undefined, { shallow: true })
@@ -120,6 +121,7 @@ export const CommentsList = () => {
               </Link>
               <p>Post Id: {comment.postId}</p>
               <p>Commenter Id: {comment.authorId}</p>
+              {/*<p>Commenter Id: {author.name}</p>*/}
               {/*<p>{...author, comment.authorId}</p>*/}
             </div>
           </li>

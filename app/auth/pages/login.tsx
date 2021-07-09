@@ -10,21 +10,30 @@ export const UserInfo = () => {
 
   if (currentUser) {
     return (
-      <>
+      <div className={"text-left w-50 mx-auto bg-gray-700 p-4 text-indigo-200"}>
         <button
-          className="button small"
+          className="btn p-2 font-semibold bg-[#16c9c9] active:bg-[#1133b8] text-black active:text-white rounded my-2 transition-all active:text-white active:outline-none"
           onClick={async () => {
             await logoutMutation()
           }}
         >
           Logout
         </button>
+        <Link href={Routes.SettingsPage()}>
+          <a
+            className={
+              "btn p-2 font-semibold bg-red-200 active:bg-[#1452b2] text-black active:text-white rounded my-2 transition-all mx-4"
+            }
+          >
+            User Settings
+          </a>
+        </Link>
         <div>
           User id: <code>{currentUser.id}</code>
           <br />
           User role: <code>{currentUser.role}</code>
         </div>
-      </>
+      </div>
     )
   }
   return (

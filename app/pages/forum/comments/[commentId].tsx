@@ -14,8 +14,8 @@ export const Comment = () => {
   const [deleteCommentMutation] = useMutation(deleteComment)
   const [comment] = useQuery(getComment, { id: commentId })
   const userId = comment.authorId
-  const [users] = useQuery(getUsers, { id: comment.authorId })
-  // const [user] = useQuery(getUser, { id: 2})
+  // const [users] = useQuery(getUsers, { id: comment.authorId })
+  const [author] = useQuery(getUser, { where: { id: userId }, select: { name: true } })
   const [post] = useQuery(getPost, { id: comment.postId })
   // {comment.}
   return (
@@ -28,6 +28,8 @@ export const Comment = () => {
 
       <div>
         <h1>Comment {comment.id}</h1>
+        <h1>Commenter: {author.name}</h1>
+        <h1>Comment {comment.content}</h1>
 
         {/*<Link href={Routes.EditCommentPage({ commentId: comment.id })}>*/}
         {/*  <a>Edit</a>*/}
