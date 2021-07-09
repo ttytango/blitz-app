@@ -29,8 +29,10 @@ export function PostListDetail(props) {
   const author = useQuery(getUser, { id: props.poster })
   console.log(author)
   return (
-    <div className="flex flex-col mb-2">
-      <p>Originally posted by: {author.id}</p>
+    <div className="flex w-8/12 mx-auto">
+      <div className="flex flex-col mb-2 text-left">
+        <p>Originally posted by: {author.id}</p>
+      </div>
     </div>
   )
 }
@@ -40,21 +42,6 @@ export default function Feed(props) {
   const feed = props.items
   // const [author] = useQuery(getUsers, {id: feed.authorId}  )
   // console.log(author)
-
-  // const getAuthor = (post) => {
-  //   let author = [];
-  //   post.forEach((p) => {
-  //     author += p.authorId
-  //   })
-  //  author.map((person) => {
-  //    let data
-  //    return data = useQuery(getUser, { id: author[person] })
-  //  })
-  // }
-
-  // const [users] = useQuery(getUsers, {data: { id: authorId }} )
-  // post.forEach((post) => {
-  // })
 
   return feed ? (
     <>

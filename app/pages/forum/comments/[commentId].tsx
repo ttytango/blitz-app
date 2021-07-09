@@ -5,6 +5,7 @@ import Layout from "app/core/layouts/Layout"
 import getComment from "app/comments/queries/getComment"
 import deleteComment from "app/comments/mutations/deleteComment"
 import getUser from "app/users/queries/getUser"
+import getUsers from "app/users/queries/getUsers"
 import getPost from "app/forum/queries/getPost"
 
 export const Comment = () => {
@@ -12,29 +13,36 @@ export const Comment = () => {
   const commentId = useParam("commentId", "number")
   const [deleteCommentMutation] = useMutation(deleteComment)
   const [comment] = useQuery(getComment, { id: commentId })
-  const [author] = useQuery(getUser, { id: comment.authorId })
+  const userId = comment.authorId
+  const [users] = useQuery(getUsers, { id: comment.authorId })
+  // const [user] = useQuery(getUser, { id: 2})
   const [post] = useQuery(getPost, { id: comment.postId })
-
+  // {comment.}
   return (
     <>
+      <pre>{JSON.stringify(comment, null, 2)}</pre>
+      {/*<pre>{JSON.stringify(users, null, 6)}</pre>*/}
       <Head>
         <title>Comment {comment.id}</title>
       </Head>
 
       <div>
         <h1>Comment {comment.id}</h1>
-        <pre>{JSON.stringify(comment, null, 2)}</pre>
 
-        <Link href={Routes.EditCommentPage({ commentId: comment.id })}>
-          <a>Edit</a>
-        </Link>
+        {/*<Link href={Routes.EditCommentPage({ commentId: comment.id })}>*/}
+        {/*  <a>Edit</a>*/}
+        {/*</Link>*/}
+        {/*<p>Posted By: {users.filter((user) => (comment.authorId === user.id) )? user : null)} }}</p>*/}
 
         <button
           type="button"
+          className={
+            "p-1 px-2 my-6 font-bold bg-red-500 rounded-lg hover:shadow-md active:bg-red-800 active:outline-none focus:outline-none"
+          }
           onClick={async () => {
             if (window.confirm("This will be deleted")) {
               await deleteCommentMutation({ id: comment.id })
-              router.push(Routes.CommentsPage())
+              router.push(Routes.ForumHome())
             }
           }}
           style={{ marginLeft: "0.5rem" }}
@@ -46,11 +54,12 @@ export const Comment = () => {
   )
 }
 
-const ShowCommentPage: BlitzPage = () => {
+const ShowCommentPage: BlitzPage = (props) => {
+  const here = props
   return (
     <div>
       <p>
-        <Link href={Routes.CommentsPage()}>
+        <Link href={Routes.ForumHome()}>
           <a>Comments</a>
         </Link>
       </p>
