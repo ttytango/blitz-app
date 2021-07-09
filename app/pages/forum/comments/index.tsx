@@ -14,6 +14,7 @@ import getComments from "app/comments/queries/getComments"
 import getUsers from "../../../users/queries/getUsers"
 import getUser from "../../../users/queries/getUser"
 import { string } from "zod"
+import { Comment } from "./[commentId]"
 // import ShowCommentPage from "app/pages/forum/comments/index"
 const ITEMS_PER_PAGE = 10
 
@@ -74,6 +75,8 @@ export const CommentsList = () => {
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
+  // const [author] = useQuery(getUser, {where: {select: {id: commentId}}})
+
   // useEffect(() => {
   //
   //   router.push("/?page=1", undefined, { shallow: true })
@@ -116,13 +119,14 @@ export const CommentsList = () => {
         {comments.map((comment) => (
           <li key={comment.id} className={"my-2 md:w-11/12 mx-auto"}>
             <div className={"bg-gray-300 my-2 p-4 border border-1 border-black"}>
+              {/*<Comment commentId={comment.id} />*/}
               <Link href={Routes.ShowCommentPage({ commentId: comment.id })}>
                 <a className={"text-sm lg:text-lg"}>{comment.content}</a>
               </Link>
               <p>Post Id: {comment.postId}</p>
               <p>Commenter Id: {comment.authorId}</p>
-              {/*<p>Commenter Id: {author.name}</p>*/}
-              {/*<p>{...author, comment.authorId}</p>*/}
+
+              <p>Commenter Id: {comment.authorId}</p>
             </div>
           </li>
         ))}

@@ -86,10 +86,6 @@ const PostDetailPage: BlitzPage = () => {
           <CommentForm here={postId} />
           <CommentsPage />
         </div>
-        {/*<ShowCommentPage here={postId} />*/}
-        {/*<Link href={`/forum/${postId}/comments/create-comment`}>*/}
-        {/*  <a>New Comment</a>*/}
-        {/*</Link>*/}
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ const ForumHome: BlitzPage = (props) => {
   if (session.userId === null) {
     return (
       <div>
-        <h2>
+        <h2 className={"font-semibold"}>
           Please{" "}
           <a href={"/login"} className="no-underline hover:underline text-blue-800">
             log in
@@ -46,7 +46,11 @@ export async function getServerSideProps() {
   // const res = await prisma.post.findMany()
   // @ts-ignore
 
-  let feed = await db.post.findMany({})
+  let feed = await db.post.findMany({
+    orderBy: {
+      updatedAt: "desc",
+    },
+  })
 
   // let feed = await db.post.findMany({
   // return transaction([something], [somethingElse])
