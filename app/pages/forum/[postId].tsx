@@ -8,6 +8,7 @@ import {
   useQuery,
   useRouter,
 } from "blitz"
+import db from "db"
 import Layout from "app/core/layouts/Layout"
 import getPost from "app/forum/queries/getPost"
 import humanReadableDateTime from "app/core/parsers/dates"
@@ -19,6 +20,7 @@ import { CommentsList } from "./comments/index"
 import CommentsPage from "./comments"
 import ShowCommentPage from "./comments/[commentId]"
 import { UserInfo } from "../../auth/pages/login"
+import { useEffect } from "react"
 
 export const Post = ({ here }) => {
   const postId = here
@@ -41,6 +43,7 @@ export const Post = ({ here }) => {
         <p>Posted By: {userName}</p>
         {/*<p>Author: {authors[post.authorId].name}</p>*/}
         <p>{createdAt}</p>
+
         <Link href={`/forum/${post.id}/edit`}>
           <a>Edit</a>
         </Link>

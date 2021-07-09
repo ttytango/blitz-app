@@ -1,5 +1,5 @@
 import { BlitzPage } from "blitz"
-
+import ChangePasswordForm from "app/auth/components/ChangePasswordForm"
 const SettingsPage: BlitzPage = () => {
   return (
     <div>

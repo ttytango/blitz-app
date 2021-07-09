@@ -1,6 +1,7 @@
 import { BlitzPage, useQuery, Link } from "blitz"
 import LoginPage, { UserInfo } from "../../auth/pages/login"
 import { useCurrentUser } from "../../core/hooks/useCurrentUser"
+import ChangePasswordForm from "../../auth/components/ChangePasswordForm"
 
 const SettingsPage: BlitzPage = () => {
   const currentUser = useCurrentUser()
@@ -22,6 +23,9 @@ const SettingsPage: BlitzPage = () => {
         <Link href={"/forum"}>
           <a>Return to Forum</a>
         </Link>
+        <div className={"bg-blue-200"}>
+          <ChangePasswordForm />
+        </div>
 
         <p>
           You are logged in as: <strong>{userName}</strong>

@@ -32,17 +32,6 @@ import React, { useState } from "react"
 export default function NavItem({ href, /*isActive, */ children, activeHandler }) {
   // const [isActive, setIsActive] = useState(false)
 
-  // const windowPath = {window}.location.pathname === to;
-  // let className = isActive ? 'active' : '';
-
-  // const activeHandler = (event) => {
-  //   event.preventDefault();
-  //   if (isActive) {
-  //     setIsActive(false)
-  //   } else {
-  //     setIsActive(true)
-  //   }
-  // }
   return (
     <li>
       <Link href={href}>
