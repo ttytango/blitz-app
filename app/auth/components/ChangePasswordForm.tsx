@@ -15,11 +15,11 @@ export const ChangePasswordForm = (props: ChangePasswordFormProps) => {
   const initialValues = { currentPassword: "", newPassword: "" }
 
   return (
-    <div className="shadow-md bg-white rounded-lg h-18 p-10 width-300 mx-auto">
+    <div className="shadow-md bg-gray-200 rounded h-18 p-2 sm:p-10 sm:width-300 mx-auto w-9/12 lg:w-4/12">
       <h1 className={"text-xl"}>Change Forum Password</h1>
 
       <Form
-        className={"mt-4"}
+        className={"mt-4 mx-auto"}
         submitText="Change Password"
         schema={ChangePassword}
         initialValues={initialValues}
