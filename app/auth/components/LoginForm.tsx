@@ -13,7 +13,7 @@ export const LoginForm = (props: LoginFormProps) => {
 
   return (
     <div
-      className="shadow-md bg-white rounded-lg h-18 p-10"
+      className="shadow-lg bg-white rounded h-18 p-10 mb-6 mt-2"
       // className="bg-blend-darken bg-[rgba(123,123,123,0.5)] rounded-2xl"
     >
       <h1 className="text-2xl">Login</h1>
@@ -47,8 +47,29 @@ export const LoginForm = (props: LoginFormProps) => {
         </div>
       </Form>
 
-      <div style={{ marginTop: "1rem" }}>
-        Or <Link href={Routes.SignupPage()}>Sign Up</Link>
+      <div
+        style={{
+          marginTop: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          alignItems: "space-between",
+          width: "120px",
+          margin: "1rem auto 0",
+          padding: ".5rem 1rem",
+          borderTop: "1px solid black",
+        }}
+      >
+        Or{" "}
+        <Link href={Routes.SignupPage()}>
+          <button
+            className={
+              "btn p-2 font-semibold bg-red-200 hover:bg-yellow-100 active:bg-[#1133b8] text-black active:text-white rounded transition-all active:text-white active:outline-none"
+            }
+          >
+            Sign Up
+          </button>
+        </Link>
       </div>
     </div>
   )

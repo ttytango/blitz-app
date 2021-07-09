@@ -12,7 +12,7 @@ export const UserInfo = () => {
     return (
       <div className={"text-left w-50 mx-auto bg-gray-700 p-4 text-indigo-200"}>
         <button
-          className="btn p-2 font-semibold bg-[#16c9c9] active:bg-[#1133b8] text-black active:text-white rounded my-2 transition-all active:text-white active:outline-none"
+          className="btn p-2 font-semibold bg-[#16c9c9] hover:bg-green-100 active:bg-[#1133b8] text-black active:text-white rounded my-2 transition-all active:text-white active:outline-none"
           onClick={async () => {
             await logoutMutation()
           }}
@@ -22,7 +22,7 @@ export const UserInfo = () => {
         <Link href={Routes.SettingsPage()}>
           <a
             className={
-              "btn p-2 font-semibold bg-red-200 active:bg-[#1452b2] text-black active:text-white rounded my-2 transition-all mx-4"
+              "btn p-2 font-semibold bg-red-200 hover:bg-yellow-100 active:bg-[#1452b2] text-black active:text-white rounded my-2 transition-all mx-4"
             }
           >
             User Settings

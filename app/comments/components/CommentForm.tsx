@@ -5,6 +5,7 @@ import db from "db"
 export { FORM_ERROR } from "app/core/components/Form"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import createComment, { CreateComment } from "app/comments/mutations/createComment"
+import LoginPage from "../../auth/pages/login"
 
 type CommentFormProps = {
   onSuccess?: () => void
@@ -15,6 +16,13 @@ export function CommentForm<S extends z.ZodType<any, any>>(props: CommentFormPro
   const session = useSession()
   const userID = session.userId
   const [createCommentMutation] = useMutation(createComment)
+  if (!session) {
+    return (
+      <div>
+        <LoginPage />
+      </div>
+    )
+  }
 
   return (
     <Form<S>
@@ -41,7 +49,7 @@ export function CommentForm<S extends z.ZodType<any, any>>(props: CommentFormPro
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-green-200 border rounded-lg active:shadow-md hover:shadow-md active:shadow-none active:outline-none active:bg-gray-600 focus:outline-none transition-all"
+        className="px-4 py-2 bg-green-200 border rounded-lg active:shadow-md active:text-white hover:shadow-md active:shadow-none active:outline-none active:bg-gray-600 focus:outline-none transition-all"
       >
         Submit Comment
       </button>
