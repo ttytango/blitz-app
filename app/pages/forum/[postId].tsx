@@ -18,23 +18,29 @@ import { CommentForm } from "app/comments/components/CommentForm"
 import { CommentsList } from "./comments/index"
 import CommentsPage from "./comments"
 import ShowCommentPage from "./comments/[commentId]"
+import { UserInfo } from "../../auth/pages/login"
 
 export const Post = ({ here }) => {
   const postId = here
   const router = useRouter()
   const [deletePostMutation] = useMutation(deletePost)
   const [post] = useQuery(getPost, { id: postId })
-  const [authors] = useQuery(getUsers, { id: post.authorId })
+  // const [authors] = useQuery(getUsers, { id: post.authorId })
+  const [author] = useQuery(getUser, { where: { id: post.authorId }, select: { name: true } })
 
-  const created = humanReadableDateTime(post.createdAt)
+  const userName: string | undefined | null = author?.name
+
+  const createdAt = humanReadableDateTime(post.createdAt)
+
   return (
     <>
       <div>
         <h1>Post {post.id}</h1>
         <h4 className={"text-lg font-bold"}>{post.title}</h4>
         <p>Content: {post.content}</p>
+        <p>Posted By: {userName}</p>
         {/*<p>Author: {authors[post.authorId].name}</p>*/}
-        <p>{created}</p>
+        <p>{createdAt}</p>
         <Link href={`/forum/${post.id}/edit`}>
           <a>Edit</a>
         </Link>
@@ -58,26 +64,33 @@ export const Post = ({ here }) => {
 
 const PostDetailPage: BlitzPage = () => {
   const postId = useParam("postId", "number")
-  // console.log(postId)
   return (
-    <div>
-      <p>
-        <Link href={"/forum"}>
-          <a>Back</a>
-        </Link>
-      </p>
-
-      <Post here={postId} />
-      <CommentForm
-        here={postId}
-        // onSubmit={(e) => e.preventDefault}
-      />
-      <CommentsPage />
-
-      {/*<ShowCommentPage here={postId} />*/}
-      {/*<Link href={`/forum/${postId}/comments/create-comment`}>*/}
-      {/*  <a>New Comment</a>*/}
-      {/*</Link>*/}
+    <div className={"bg-gray-600"}>
+      <UserInfo />
+      <div className={"bg-gray-200 md:mx-4 md:mt-4"}>
+        <div className={"py-2 text-right p-2 mx-4"}>
+          <p>
+            <Link href={"/forum"}>
+              <a
+                className={
+                  "btn px-2 py-1 font-bold bg-red-500 active:bg-red-700 transition-all rounded"
+                }
+              >
+                Back
+              </a>
+            </Link>
+          </p>
+        </div>
+        <div>
+          <Post here={postId} />
+          <CommentForm here={postId} />
+          <CommentsPage />
+        </div>
+        {/*<ShowCommentPage here={postId} />*/}
+        {/*<Link href={`/forum/${postId}/comments/create-comment`}>*/}
+        {/*  <a>New Comment</a>*/}
+        {/*</Link>*/}
+      </div>
     </div>
   )
 }

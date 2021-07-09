@@ -46,11 +46,7 @@ export async function getServerSideProps() {
   // const res = await prisma.post.findMany()
   // @ts-ignore
 
-  let feed = await db.post.findMany({
-    where: {
-      published: false,
-    },
-  })
+  let feed = await db.post.findMany({})
 
   // let feed = await db.post.findMany({
   // return transaction([something], [somethingElse])
