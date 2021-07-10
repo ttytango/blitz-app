@@ -32,6 +32,11 @@ const ForumHome: BlitzPage = (props) => {
 
   return (
     <div>
+      <div>
+        <Link href={"/forum/new-post"}>
+          <button className="no-underline hover:underline text-blue-800">Create a Post</button>
+        </Link>
+      </div>
       <UserInfo />
       <div className={"bg-blue-200"}>
         <h3 className={"py-6 text-lg"}>Recent Posts</h3>
