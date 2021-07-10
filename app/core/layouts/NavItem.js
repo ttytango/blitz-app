@@ -1,6 +1,6 @@
 import { Link, Router, Routes, Ctx } from "blitz"
 import React, { useState } from "react"
-// onClick={activeHandler}
+
 export default function NavItem({ href, children }) {
   return (
     <li>
