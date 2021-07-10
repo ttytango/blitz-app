@@ -112,13 +112,15 @@ export const CommentsList = () => {
   }
   return (
     <div className={"bg-gray-600 p-2 mt-4"}>
+      <h2 className="text-indigo-200 text-lg my-2">Comments</h2>
+
       {/*<pre>{JSON.stringify(comments, null, 2)}</pre>*/}
       {/*<pre>{JSON.stringify(post, null, 2)}</pre>*/}
       {/*<pre>{JSON.stringify(author, null, 2)}</pre>*/}
       <ul>
         {comments.map((comment) => (
           <li key={comment.id} className={"my-2 md:w-11/12 mx-auto"}>
-            <div className={"bg-gray-300 my-2 p-4 border border-1 border-black"}>
+            <div className={"bg-gray-300 my-2 p-4 border border-1 border-black shadow-md"}>
               {/*<Comment commentId={comment.id} />*/}
               <Link href={Routes.ShowCommentPage({ commentId: comment.id })}>
                 <a className={"text-sm lg:text-lg"}>{comment.content}</a>
@@ -152,20 +154,13 @@ export const CommentsList = () => {
 }
 
 const CommentsPage: BlitzPage = () => {
-  // const postID = here
   return (
     <>
-      <Head>
-        <title>Comments</title>
-      </Head>
+      {/*<Head>*/}
+      {/*  <title>Comments</title>*/}
+      {/*</Head>*/}
 
       <div>
-        {/*<p>*/}
-        {/*  <Link href={Routes.NewCommentPage()}>*/}
-        {/*    <a>Create Comment</a>*/}
-        {/*  </Link>*/}
-        {/*</p>*/}
-
         <Suspense fallback={<div>Loading...</div>}>
           <CommentsList />
         </Suspense>

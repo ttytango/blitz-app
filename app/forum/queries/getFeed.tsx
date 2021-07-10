@@ -3,11 +3,11 @@ import db, { Prisma } from "db"
 
 type getFeedInput = Pick<
   Prisma.PostFindManyArgs,
-  "where"
+  "where" | "take"
   // | "orderBy" | "skip" | "take"
 >
 
-export default async function getFeed({ where }: getFeedInput, { session }: Ctx) {
+export default async function getFeed({ where, take }: getFeedInput, { session }: Ctx) {
   if (!session.userId) return null
 
   //   ctx.session.$authorize()
