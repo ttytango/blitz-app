@@ -4,6 +4,7 @@ import Layout from "app/core/layouts/Layout"
 import getComment from "app/comments/queries/getComment"
 import updateComment from "app/comments/mutations/updateComment"
 import { CommentForm, FORM_ERROR } from "app/comments/components/CommentForm"
+import getUser from "../../../../users/queries/getUser"
 
 export const EditComment = () => {
   const router = useRouter()
@@ -16,6 +17,10 @@ export const EditComment = () => {
       staleTime: Infinity,
     }
   )
+  const userId = comment.authorId
+  // const [users] = useQuery(getUsers, { id: comment.authorId })
+  const [author] = useQuery(getUser, { where: { id: userId }, select: { name: true } })
+
   const [updateCommentMutation] = useMutation(updateComment)
 
   return (
@@ -51,6 +56,12 @@ export const EditComment = () => {
             }
           }}
         />
+        <p>
+          <p>Comment By: {author.name}</p>
+          <Link href={Routes.PostDetailPage({ postId: comment.postId })}>
+            <a>Back</a>
+          </Link>
+        </p>
       </div>
     </>
   )
@@ -62,12 +73,6 @@ const EditCommentPage: BlitzPage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <EditComment />
       </Suspense>
-
-      <p>
-        <Link href={Routes.CommentsPage()}>
-          <a>Comments</a>
-        </Link>
-      </p>
     </div>
   )
 }

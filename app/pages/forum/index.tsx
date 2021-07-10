@@ -5,7 +5,7 @@ import Layout from "app/core/layouts/Layout"
 import Feed from "app/forum/components/feed"
 // import useSWR from "swr";
 import db from "db"
-import { PrismaClient } from "@prisma/client"
+// import { PrismaClient } from "@prisma/client"
 
 // type props {
 //   postList
@@ -19,7 +19,7 @@ const ForumHome: BlitzPage = (props) => {
   if (session.userId === null) {
     return (
       <div>
-        <h2>
+        <h2 className={"font-semibold"}>
           Please{" "}
           <a href={"/login"} className="no-underline hover:underline text-blue-800">
             log in
@@ -29,14 +29,6 @@ const ForumHome: BlitzPage = (props) => {
       </div>
     )
   }
-  // if (loading) {
-  //   return <div>Loading....</div>
-  // }
-
-  // const {users} = useUsers();
-  // if (posts.length < 0) {
-  //   return <div>Loading...</div>
-  // }
 
   return (
     <div>
@@ -46,45 +38,34 @@ const ForumHome: BlitzPage = (props) => {
         </Link>
       </div>
       <UserInfo />
-      <Feed items={posts} />
+      <div className={"bg-blue-200"}>
+        <h3 className={"py-6 text-lg"}>Recent Posts</h3>
+
+        <Feed items={posts} />
+      </div>
     </div>
   )
 }
 
-ForumHome.suppressFirstRenderFlicker = false
+ForumHome.suppressFirstRenderFlicker = true
 ForumHome.getLayout = (page) => <Layout title="Home">{page}</Layout>
 
 export async function getServerSideProps() {
-  const prisma = new PrismaClient()
+  // const prisma = new PrismaClient()
   // const res = await prisma.post.findMany()
-  const feed = await prisma.post.findMany({
-    orderBy: { updatedAt: "desc" },
-    // include: { author: { select: { firstName: true } } },
-    // include: {
-    // author: {
-    // 	select: {
-    // 		id: false,
-    // 	},
-    // },
-    // },
+  // @ts-ignore
+
+  let feed = await db.post.findMany({
+    take: 10,
+    orderBy: {
+      updatedAt: "desc",
+    },
   })
+
   const stringifiedFeed = await JSON.stringify(feed)
   const parsedFeed = await JSON.parse(stringifiedFeed)
+  console.log(parsedFeed)
 
-  //   const res = await db.post.findMany({
-  //   where: {
-  //     published: true,
-  //   },
-  // })
-  // const {data, error} = useSWR("/api/forum/posts");
-  // const loading = !data;
-  //   if (loading) {
-  //       return <div>Loading...</div>
-  //   }
-
-  //   if (error) {
-  //      return <div>Error!</div>
-  //   }
   return {
     props: {
       postList: parsedFeed,

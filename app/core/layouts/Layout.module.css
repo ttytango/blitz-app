@@ -1,11 +1,19 @@
 .layoutMain {
-  margin: 0 2vw;
-  padding: 2vw;
+  /*margin: 0 1vw;*/
+  /*padding: 2vw;*/
   text-align: center;
   background: lightblue;
-  min-height: 80vh;
+  min-height: 60vh;
+  /*width: 80vw;*/
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
 }
+
+/*@media(min-width: 980px) {*/
+/*  .layoutMain {*/
+/*    width: 90vw;*/
+/*  }*/
+/*}*/
