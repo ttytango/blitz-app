@@ -58,7 +58,7 @@ export const Post = ({ here }) => {
                 onClick={() => {
                   prompt("Report post....")
                 }}
-                className={"text-red-600 px-6"}
+                className="text-red-600 px-6 font-normal text-sm"
               >
                 Report Post?
               </a>
@@ -94,7 +94,7 @@ const PostDetailPage: BlitzPage = () => {
   return (
     <div className={"bg-gray-600"}>
       <UserInfo />
-      <div className={"bg-gray-400 md:mx-4 mt-4"}>
+      <div className={"bg-gray-400 md:mx-4 mt-4 lg:px-20"}>
         <div className={"p-4 text-right mx-4"}>
           <p>
             <Link href={"/forum"}>

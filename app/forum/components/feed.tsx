@@ -28,6 +28,7 @@ import getComment from "../../comments/queries/getComment"
 export function PostListDetail(props) {
   // const userId = props.poster;
   const { poster, postId } = props
+  // @ts-ignore
   const [author] = useQuery(getUser, { where: { id: poster }, select: { name: true } })
   // const [comment] = useQuery(getComment, {where: {thread}, select: {createdAt: true, last: true}})
   // const author = useQuery(getUser, { id: props.poster })

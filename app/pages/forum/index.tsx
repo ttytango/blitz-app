@@ -33,7 +33,11 @@ const ForumHome: BlitzPage = (props) => {
   return (
     <div>
       <UserInfo />
-      <Feed items={posts} />
+      <div className={"bg-blue-200"}>
+        <h3 className={"py-6 text-lg"}>Recent Posts</h3>
+
+        <Feed items={posts} />
+      </div>
     </div>
   )
 }
@@ -47,6 +51,7 @@ export async function getServerSideProps() {
   // @ts-ignore
 
   let feed = await db.post.findMany({
+    take: 10,
     orderBy: {
       updatedAt: "desc",
     },

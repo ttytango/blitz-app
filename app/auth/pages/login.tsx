@@ -10,29 +10,31 @@ export const UserInfo = () => {
 
   if (currentUser) {
     return (
-      <div className={"text-left w-50 mx-auto bg-gray-700 p-4 text-indigo-200"}>
-        <button
-          className="btn p-2 font-semibold bg-[#16c9c9] hover:bg-green-100 active:bg-[#1133b8] text-black active:text-white rounded my-2 transition-all active:text-white active:outline-none"
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </button>
-        <Link href={Routes.SettingsPage()}>
-          <a
-            className={
-              "btn p-2 font-semibold bg-red-200 hover:bg-yellow-100 active:bg-[#1452b2] text-black active:text-white rounded my-2 transition-all mx-4"
-            }
+      <div className={"text-left w-50 mx-auto bg-gray-700 p-4 text-indigo-200 md:px-12"}>
+        <nav className={"lg:px-20"}>
+          <button
+            className="btn p-2 font-semibold bg-[#16c9c9] hover:bg-green-100 active:bg-[#1133b8] text-black active:text-white rounded my-2 transition-all active:text-white active:outline-none"
+            onClick={async () => {
+              await logoutMutation()
+            }}
           >
-            User Settings
-          </a>
-        </Link>
-        <div>
-          User id: <code>{currentUser.id}</code>
-          <br />
-          User role: <code>{currentUser.role}</code>
-        </div>
+            Logout
+          </button>
+          <Link href={Routes.SettingsPage()}>
+            <a
+              className={
+                "btn p-2 font-semibold bg-red-200 hover:bg-yellow-100 active:bg-[#1452b2] text-black active:text-white rounded my-2 transition-all mx-4"
+              }
+            >
+              User Settings
+            </a>
+          </Link>
+          <div>
+            User id: <code>{currentUser.id}</code>
+            <br />
+            User role: <code>{currentUser.role}</code>
+          </div>
+        </nav>
       </div>
     )
   }
